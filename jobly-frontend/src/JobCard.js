@@ -15,7 +15,7 @@ function JobCard({ job }) {
     salary = (salary) ? salary : null;
     
     return (
-        <div className="Card">
+        <div className="Card shadow-sm p-3 mb-5 bg-white rounded">
             <h3 className="header">{title}</h3>
             <h6>{companyHandle}</h6>
             {salary && <p>Salary: {salary}</p>}

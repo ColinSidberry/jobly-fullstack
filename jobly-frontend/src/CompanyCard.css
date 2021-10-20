@@ -12,10 +12,21 @@ img {
     color: inherit;
     text-decoration: none;
 }
+
+.Card :hover{
+    box-shadow: 10px 5px 5px red;
+}
+/* Question: Why isn't this around the whole div element? */
+
 a {
     color: inherit;
     text-decoration: none;
 }
+
+a:hover{
+    text-decoration: none;
+}
+
 .header {
     margin: 5px;
 

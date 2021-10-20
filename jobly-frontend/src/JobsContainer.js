@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SearchForm from './SearchForm';
 import JobList from './JobList';
 import JoblyApi from "./api";
+import "./JobsContainer.css";
 
 /**Renders list of jobs. 
  * Calls API for list of jobs.
@@ -38,7 +39,7 @@ function JobsContainer() {
     if (error) return <b>Error fetching jobs data: {error}</b>
     else if (!jobList) return <i>Loading...</i>
     else return (
-        <div>
+        <div className="JobsContainer">
             <SearchForm handleSearch={handleSearch} />
             <JobList jobList={jobList} />
         </div>

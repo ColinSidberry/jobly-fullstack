@@ -1,4 +1,5 @@
 import React from "react";
+import "./Home.css"
 
 /**Renders homepage
  * Props, State: none
@@ -7,7 +8,7 @@ import React from "react";
  */
 function Home() {
     return (
-        <div>
+        <div className="Home">
             <h1>Jobly</h1>
             <p>Jobs jobs jobs, come get your jobs~</p>
         </div>

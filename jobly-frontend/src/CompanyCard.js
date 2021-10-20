@@ -14,7 +14,7 @@ function Company({ company }) {
     const { name, description, logoUrl } = company;
     return (
         <Link to={`/companies/${company.handle}`}>
-            <div className="Card">
+            <div className="Card shadow-sm p-3 mb-5 bg-white rounded">
                 <h3 className="header">
                     {name}
                     {logoUrl && <img src={logoUrl} alt="company img" />}
