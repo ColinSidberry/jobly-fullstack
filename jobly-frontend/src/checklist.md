@@ -9,4 +9,9 @@ Finished:
 - Routes
 - Home
 - CompaniesContainer
+- CompanyList
+- CompanyCard
 - SearchForm
+- JobsContainer
+- JobsList
+- JobCard

@@ -15,24 +15,25 @@ import JoblyApi from "./api";
 function CompaniesContainer() {
     const [companyList, setCompanyList] = useState(null);
     const [error, setError] = useState(null);
-    const [searchTerm, setSearchTerm] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
 
     useEffect(function fetchCompaniesWhenMounted() {
         async function fetchCompanies() {
             try {
+                console.log('fetch companies is running - searchTerm: ', searchTerm)
                 const companiesResult = await JoblyApi.getCompanies(searchTerm);
-                setCompanyList(companiesResult.data);
+                setCompanyList(companiesResult);
             } catch (err) {
                 setError(err.message);
             }
         }
         fetchCompanies();
     }, [searchTerm]);
+
     function handleSearch(search) {
         setSearchTerm(search);
     }
-
     if (!companyList) return <i>Loading...</i>
     else if (error) return <b>Error fetching companies data: {error}</b>
     else return (

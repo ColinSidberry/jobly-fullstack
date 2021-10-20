@@ -1,29 +1,42 @@
 import React, { useEffect, useState } from "react";
 import SearchForm from './SearchForm';
 import JobList from './JobList';
+import JoblyApi from "./api";
 
 /**Renders list of jobs. 
  * Calls API for list of jobs.
  * 
  * Props: none
  * State: jobList, searchTerm
- * Routes -> Jobs -> JobList
+ * Routes -> JobsContainer -> JobList
  * 
  * Location: /jobs
  */
-function Jobs() {
+function JobsContainer() {
     const [jobList, setJobList] = useState(null);
+    const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState(null);
 
-    // useEffect(
-    //     setJobList(newList)
-    // )
+    useEffect(function fetchJobsWhenMounted() {
+        async function fetchJobs() {
+            try {
+                const jobsResult = await JoblyApi.getJobs(searchTerm);
+                setJobList(jobsResult);
+            } catch (err) {
+                setError(err.message);
+            }
+        }
+        fetchJobs();
+    }, [searchTerm]);
 
+    //handles job query search
     function handleSearch(search) {
         setSearchTerm(search);
     }
 
-    return (
+    if (!jobList) return <i>Loading...</i>
+    else if (error) return <b>Error fetching jobs data: {error}</b>
+    else return (
         <div>
             <SearchForm search={handleSearch} />
             <JobList jobs={jobList} />
@@ -32,8 +45,4 @@ function Jobs() {
     );
 }
 
-export default Jobs;
-
-//think about component names!!
-//CompanyCard and JobCard ... --> card for view components
-//CompanyPage --> pages for routes
+export default JobsContainer;
