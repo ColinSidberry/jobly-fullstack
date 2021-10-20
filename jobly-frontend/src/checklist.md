@@ -8,3 +8,5 @@ Finished:
 - Nav
 - Routes
 - Home
+- CompaniesContainer
+- SearchForm
