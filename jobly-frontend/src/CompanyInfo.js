@@ -19,6 +19,7 @@ function CompanyInfo() {
 
     const { handle } = useParams();
 
+    //set company after initial and searchTerm triggered renders
     useEffect(function getCompanyInfoOnMount() {
         async function getCompanyInfo() {
             try {
@@ -26,21 +27,23 @@ function CompanyInfo() {
                 const companyResult = await JoblyApi.getCompany(handle);
                 setCompany(companyResult);
             } catch (err) {
-                setError(err.message);
+                setError(err[0]);
             }
         }
         getCompanyInfo();
     }, []);
 
-    if (!company) return <i>Loading...</i>
-    else if (error) return <b>Error fetching companies data: {error}</b>
+    console.log({company});
+    console.log({error});
+    if (error) return <b>Error fetching companies data: {error}</b>
+    else if (!company) return <i>Loading...</i>
     else return (
         <div>
             <div className="company-header">
                 <h2>{company.name}</h2>
                 <p className="description">{company.description}</p>
             </div>
-            <JobList jobsList={company.jobs} />
+            <JobList jobList={company.jobs} />
         </div>
     );
 }

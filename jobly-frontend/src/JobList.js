@@ -9,11 +9,11 @@ import JobCard from "./JobCard";
  * (JobsContainer, CompanyInfo) -> JobList -> JobCard
  * 
  */
-function JobList({jobsList}) {
+function JobList({jobList}) {
     return (
         <div>
             {
-                jobsList.map(
+                jobList.map(
                     job => <JobCard job={job} key={job.id} />)
             }
         </div>

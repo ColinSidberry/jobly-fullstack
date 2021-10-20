@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import "./SearchForm.css";
 
 /**Handles Form Queries. 
  * 
@@ -19,7 +20,7 @@ function SearchForm({handleSearch}) {
  }
 
  return (
-     <form onSubmit={handleSubmit}>
+     <form className="SearchForm" onSubmit={handleSubmit}>
        <input
            id="query"
            name="query"

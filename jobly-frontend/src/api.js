@@ -45,6 +45,8 @@ class JoblyApi {
     return res.company;
   }
 
+  /** Get all companies matching filerQuery. */
+
   static async getCompanies(filterQuery) {
     const queryString = (filterQuery)
       ? `?name=${filterQuery}`
@@ -53,6 +55,8 @@ class JoblyApi {
     return res.companies;
   }
 
+  /** Get all jobs matching filerQuery. */
+
   static async getJobs(filterQuery) {
     const queryString = (filterQuery)
     ? `?title=${filterQuery}`
@@ -60,8 +64,6 @@ class JoblyApi {
     let res = await this.request(`jobs${queryString}`);
     return res.jobs;
   }
-
-  // obviously, you'll add a lot here ...
 }
 
 export default JoblyApi;

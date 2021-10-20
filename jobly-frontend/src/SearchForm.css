@@ -1,0 +1,8 @@
+.SearchForm {
+    margin:20px
+}
+/* Question: Why does the margin in the searchForm not take the margin in the parent div?  */
+
+input {
+    width: 50%
+}

@@ -17,13 +17,14 @@ function JobsContainer() {
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState(null);
 
+    //set companyList after initial and searchTerm triggered renders
     useEffect(function fetchJobsWhenMounted() {
         async function fetchJobs() {
             try {
                 const jobsResult = await JoblyApi.getJobs(searchTerm);
                 setJobList(jobsResult);
             } catch (err) {
-                setError(err.message);
+                setError(err[0]);
             }
         }
         fetchJobs();
@@ -34,12 +35,12 @@ function JobsContainer() {
         setSearchTerm(search);
     }
 
-    if (!jobList) return <i>Loading...</i>
-    else if (error) return <b>Error fetching jobs data: {error}</b>
+    if (error) return <b>Error fetching jobs data: {error}</b>
+    else if (!jobList) return <i>Loading...</i>
     else return (
         <div>
-            <SearchForm search={handleSearch} />
-            <JobList jobs={jobList} />
+            <SearchForm handleSearch={handleSearch} />
+            <JobList jobList={jobList} />
         </div>
 
     );
