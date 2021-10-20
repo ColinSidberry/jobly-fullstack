@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "./Home";
-import Companies from "./Companies";
-import Jobs from "./Jobs";
+import CompaniesContainer from "./CompaniesContainer";
+import JobsContainer from "./JobsContainer";
 import CompanyInfo from "./CompanyInfo";
 
-/** Renders Routes for Companies, CompanyInfo, Jobs, Home
+/** Renders Routes for CompaniesContainer, CompanyInfo, JobsContainer, Home
 *
 * Props:
 * - None
@@ -13,14 +13,14 @@ import CompanyInfo from "./CompanyInfo";
 * State:
 * - None
 *
-* App -> Routes -> (Home, Companies, Company, Jobs)
+* App -> Routes -> (Home, CompaniesContainer, Company, JobsContainer)
 */
 function Routes() {
     return (
         <Switch>
-            <Route exact path="/companies"><Companies /></Route>
+            <Route exact path="/companies"><CompaniesContainer /></Route>
             <Route exact path="/companies/:handle"><CompanyInfo /></Route>
-            <Route exact path="/jobs"><Jobs /></Route>
+            <Route exact path="/jobs"><JobsContainer /></Route>
             <Route exact path="/"><Home /></Route>
             <Redirect to="/" />
         </Switch>
