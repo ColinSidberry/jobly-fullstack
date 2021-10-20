@@ -59,11 +59,13 @@ class JoblyApi {
 
   static async getJobs(filterQuery) {
     const queryString = (filterQuery)
-    ? `?title=${filterQuery}`
-    : '';
+      ? `?title=${filterQuery}`
+      : '';
     let res = await this.request(`jobs${queryString}`);
     return res.jobs;
   }
+  //FIXME: use data parameter instead of building the queryString
+  //FIXME: make the docstrings reflect input/output
 }
 
 export default JoblyApi;

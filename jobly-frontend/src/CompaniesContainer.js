@@ -8,14 +8,14 @@ import "./CompaniesContainer.css"
  * Calls API for list of companies.
  * 
  * Props: none
- * State: companyList, searchTerm
+ * State: companyList, searchTerm, errors
  * Routes -> CompaniesContainer -> (CompanyList, SearchForm)
  * 
  * Location: /companies
  */
 function CompaniesContainer() {
     const [companyList, setCompanyList] = useState(null);
-    const [error, setError] = useState(null);
+    const [errors, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
 
     //set companyList after initial and searchTerm triggered renders
@@ -32,14 +32,15 @@ function CompaniesContainer() {
         fetchCompanies();
     }, [searchTerm]);
 
-    //handles job query search
+    //handles company query search
     function handleSearch(search) {
         setSearchTerm(search);
     }
+    //FIXME: adjust search to show message if no company found
 
-    if (error) return <b>Error fetching companies data: {error}</b>
-    else if (!companyList) return <i>Loading...</i>
-    else return (
+    if (errors) return <b>Error fetching companies data: {errors}</b>
+    if (!companyList) return <i>Loading...</i>
+    return (
         <div className="CompaniesContainer">
             <SearchForm handleSearch={handleSearch} />
             <CompanyList companyList={companyList} />

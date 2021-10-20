@@ -4,11 +4,11 @@ import "./SearchForm.css";
 /**Handles Form Queries. 
  * 
  * Props: handleSearch fn
- * State: query-string
+ * State: searchTerm - string
  * (CompaniesContainer, JobsContainer) -> SearchForm
  */
 function SearchForm({handleSearch}) {
- const [query, setQuery] = useState("");
+ const [searchTerm, setQuery] = useState("");
 
  function handleChange(evt) {
    setQuery(evt.target.value);
@@ -16,16 +16,16 @@ function SearchForm({handleSearch}) {
  
  function handleSubmit(evt) {
    evt.preventDefault();
-   handleSearch(query);
+   handleSearch(searchTerm);
  }
 
  return (
      <form className="SearchForm" onSubmit={handleSubmit}>
        <input
-           id="query"
-           name="query"
+           id="searchTerm"
+           name="searchTerm"
            placeholder="Enter Search Term..."
-           value={query}
+           value={searchTerm}
            onChange={handleChange}
        />
        <button className="btn btn-primary">Search</button>

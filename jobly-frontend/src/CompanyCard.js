@@ -10,14 +10,15 @@ import './CompanyCard.css';
  * CompaniesContainer -> CompanyList -> CompanyCard
  * 
  */
-function Company({ company }) {
-    const { name, description, logoUrl } = company;
+
+function CompanyCard({ company }) {
+    const { name, description, logoUrl, handle } = company;
     return (
-        <Link to={`/companies/${company.handle}`}>
+        <Link to={`/companies/${handle}`}>
             <div className="Card shadow-sm p-3 mb-5 bg-white rounded">
                 <h3 className="header">
                     {name}
-                    {logoUrl && <img src={logoUrl} alt="company img" />}
+                    {logoUrl && <img src={logoUrl} alt={`${name} logo`} />}
                 </h3>
                 <p>{description}</p>
             </div>
@@ -25,16 +26,4 @@ function Company({ company }) {
     );
 }
 
-export default Company;
-
-// return (
-//     <Link to={`/companies/${company.id}`}>
-//         <div className="Card">
-//             <h3 className="header">
-//                 {name}
-//                 {logoUrl && <img src={logoUrl} alt="company img" />}
-//             </h3>
-//             <p>{description}</p>
-//         </div>
-//     </Link>
-// );
+export default CompanyCard;

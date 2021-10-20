@@ -3,7 +3,7 @@ import CompanyCard from './CompanyCard';
 
 /**Renders list of companies. 
  * 
- * Props: companyList
+ * Props: companyList FIXME-give example of what this is 
  * State: none
  * 
  * CompaniesContainer -> CompanyList -> CompanyCard
@@ -11,17 +11,12 @@ import CompanyCard from './CompanyCard';
  */
 function CompanyList({ companyList }) {
     return (
-        <div>
-            {
-                companyList.map(
-                    company =>
-                        <CompanyCard
-                            company={company}
-                            key={company.handle}
-                        />)
-            }
-        </div>
-
+        companyList.map(
+            company =>
+                <CompanyCard
+                    company={company}
+                    key={company.handle}
+                />)
     )
 }
 

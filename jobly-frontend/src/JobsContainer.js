@@ -8,14 +8,14 @@ import "./JobsContainer.css";
  * Calls API for list of jobs.
  * 
  * Props: none
- * State: jobList, searchTerm
+ * State: jobList, searchTerm, errors
  * Routes -> JobsContainer -> JobList
  * 
  * Location: /jobs
  */
 function JobsContainer() {
     const [jobList, setJobList] = useState(null);
-    const [error, setError] = useState(null);
+    const [errors, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState(null);
 
     //set companyList after initial and searchTerm triggered renders
@@ -36,7 +36,7 @@ function JobsContainer() {
         setSearchTerm(search);
     }
 
-    if (error) return <b>Error fetching jobs data: {error}</b>
+    if (errors) return <b>Error fetching jobs data: {errors}</b>
     else if (!jobList) return <i>Loading...</i>
     else return (
         <div className="JobsContainer">
