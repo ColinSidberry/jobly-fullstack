@@ -2,20 +2,22 @@ import { React, useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import JobList from "./JobList";
 import JoblyApi from './api';
+import Error from "./Error";
 import "./CompanyInfo.css";
 
 /**Renders company information. 
  * Calls API for company information.
  * 
  * Props: none
- * State: company
+ * State: company = { handle, name, description, numEmployees, logoUrl }
+ *        errors = [error1, ...]
  * Routes -> CompanyInfo -> JobList
  * 
  * Location: /companies/:handle
  */
 function CompanyInfo() {
     const [company, setCompany] = useState(null);
-    const [error, setError] = useState(null);
+    const [errors, setErrors] = useState(null);
 
     const { handle } = useParams();
 
@@ -27,15 +29,13 @@ function CompanyInfo() {
                 const companyResult = await JoblyApi.getCompany(handle);
                 setCompany(companyResult);
             } catch (err) {
-                setError(err[0]);
+                setErrors(err);
             }
         }
         getCompanyInfo();
     }, []);
 
-    console.log({company});
-    console.log({error});
-    if (error) return <b>Error fetching companies data: {error}</b>
+    if (errors) return <Error errors={errors} />
     else if (!company) return <i>Loading...</i>
     else return (
         <div>
@@ -43,7 +43,10 @@ function CompanyInfo() {
                 <h2>{company.name}</h2>
                 <p className="description">{company.description}</p>
             </div>
-            <JobList jobList={company.jobs} />
+            {company.jobs.length === 0
+                ? <h3>No jobs for {company}</h3>
+                : <JobList jobList={company.jobs} />
+            }
         </div>
     );
 }

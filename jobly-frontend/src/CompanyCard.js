@@ -4,7 +4,7 @@ import './CompanyCard.css';
 
 /**Renders company card 
  * 
- * Props: {company}
+ * Props: company = { handle, name, description, numEmployees, logoUrl }
  * State: none
  * 
  * CompaniesContainer -> CompanyList -> CompanyCard

@@ -4,7 +4,7 @@ import "./SearchForm.css";
 /**Handles Form Queries. 
  * 
  * Props: handleSearch fn
- * State: searchTerm - string
+ * State: searchTerm = "searchTerm"
  * (CompaniesContainer, JobsContainer) -> SearchForm
  */
 function SearchForm({handleSearch}) {

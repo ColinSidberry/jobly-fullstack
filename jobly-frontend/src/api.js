@@ -38,34 +38,43 @@ class JoblyApi {
 
   // Individual API routes
 
-  /** Get details on a company by handle. */
+  /** Get details on a company by handle. 
+   * input: handle - company handle as a string
+   * output: { handle, name, description, numEmployees, logoUrl, jobs }
+   *     where jobs is [{ id, title, salary, equity }, ...]
+  */
 
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
     return res.company;
   }
 
-  /** Get all companies matching filerQuery. */
+  /** Get all companies matching filerQuery. 
+   *  input: filterQuery - string to filter for company names.
+   *  output: [{ handle, name, description, numEmployees, logoUrl }, ...]
+  */
 
   static async getCompanies(filterQuery) {
-    const queryString = (filterQuery)
-      ? `?name=${filterQuery}`
-      : '';
-    let res = await this.request(`companies${queryString}`);
+    const query = (filterQuery)
+      ? { name: filterQuery }
+      : {};
+    let res = await this.request(`companies`, query);
     return res.companies;
   }
 
-  /** Get all jobs matching filerQuery. */
+  /** Get all jobs matching filterQuery. 
+   * input: filterQuery - string to filter for job titles.
+   * output: [{ id, title, salary, equity, companyHandle, companyName }, ...]
+  */
 
   static async getJobs(filterQuery) {
-    const queryString = (filterQuery)
-      ? `?title=${filterQuery}`
-      : '';
-    let res = await this.request(`jobs${queryString}`);
+    const query = (filterQuery)
+      ? { title: filterQuery }
+      : {};
+    let res = await this.request(`jobs`, query);
     return res.jobs;
   }
-  //FIXME: use data parameter instead of building the queryString
-  //FIXME: make the docstrings reflect input/output
+
 }
 
 export default JoblyApi;

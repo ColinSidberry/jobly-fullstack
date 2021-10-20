@@ -3,7 +3,7 @@ import './JobCard.css';
 
 /**Renders a job card. 
  * 
- * Props: job
+ * Props: job = { id, title, salary, equity, companyHandle, companyName }
  * State: none
  * 
  * JobList -> JobCard

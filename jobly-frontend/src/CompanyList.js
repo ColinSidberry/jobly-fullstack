@@ -3,7 +3,7 @@ import CompanyCard from './CompanyCard';
 
 /**Renders list of companies. 
  * 
- * Props: companyList FIXME-give example of what this is 
+ * Props: companyList = [{ handle, name, description, numEmployees, logoUrl }, ...]
  * State: none
  * 
  * CompaniesContainer -> CompanyList -> CompanyCard

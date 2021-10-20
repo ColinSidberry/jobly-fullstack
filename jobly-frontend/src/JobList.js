@@ -3,7 +3,7 @@ import JobCard from "./JobCard";
 
 /**Renders list of jobs. 
  * 
- * Props: jobList
+ * Props: [{ id, title, salary, equity, companyHandle, companyName }, ...]
  * State: none
  * 
  * (JobsContainer, CompanyInfo) -> JobList -> JobCard
