@@ -4,5 +4,8 @@
 /* Question: Why does the margin in the searchForm not take the margin in the parent div?  */
 
 input {
-    width: 50%
+    width: 50%;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid grey;
 }
