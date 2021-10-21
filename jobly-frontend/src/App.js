@@ -15,6 +15,10 @@ import { BrowserRouter } from 'react-router-dom';
 * App -> (Nav, Routes)
 */
 function App() {
+//udapteUserInfo Function 
+            //validates data, if errors->set errors , and errors are passed down
+            // App: errors = {profileErros: error}
+
   return (
     <div>
       <BrowserRouter>
