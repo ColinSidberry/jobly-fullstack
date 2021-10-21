@@ -13,7 +13,9 @@ function JobCard({ job }) {
     let { salary, equity } = job;
     equity = (equity) ? equity : null;
     salary = (salary) ? salary : null;
-    
+    // FIXME
+    // Take in applied prop
+    // add applied button
     return (
         <div className="Card shadow-sm p-3 mb-5 bg-white rounded">
             <h3 className="header">{title}</h3>

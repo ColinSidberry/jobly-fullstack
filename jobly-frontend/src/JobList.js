@@ -11,6 +11,13 @@ import JobCard from "./JobCard";
  */
 function JobList({ jobList }) {
     return (
+        // FIXME
+        //State: Get list of jobs user has applied to
+        // if job user applied to in job list
+            // pass in true to applied prop
+        // else
+            // pass in false to applied prop
+        // add applied prop to JobCard
         jobList.map(
             job => <JobCard job={job} key={job.id} />)
     );
