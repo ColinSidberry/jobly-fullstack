@@ -1,17 +1,20 @@
 import React from "react";
 
-function FormInputGroup({ inputField, inputValue, handleChange }) {
+//pass in type as property. For disabled, move logi
+function FormField({ input, handleChange }) {
     return (
         <div>
-            <label htmlFor={inputField}>{inputField}</label>
+            <label htmlFor={input.field}>{input.label}</label>
             <input
-                id="searchTerm"
-                name="searchTerm"
-                placeholder="Enter Search Term..."
-                value={inputValue}
+                id={input.field}
+                name={input.field}
+                value={input.value}
                 onChange={handleChange}
-                disabled="disabled"
+                disabled={(input.field === "username") ? "disabled" : ""}
+                type={(input.field === "password") ? "password" : "text"}
             />
         </div>
     );
 }
+
+export default FormField;
