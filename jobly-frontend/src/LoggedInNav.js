@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Nav.css";
 
-/** Makes NavLinks for Navbar
+/** Makes NavLinks for Navbar when user is logged in
 *
 * Props:
 * - None
@@ -10,9 +10,9 @@ import "./Nav.css";
 * State:
 * - None
 *
-* App -> Nav
+* App -> LoggedInNav
 */
-function Nav() {
+function LoggedInNav() {
     return (
         <nav className="Nav">
             <NavLink exact to="/">
@@ -24,8 +24,13 @@ function Nav() {
             <NavLink exact to="/jobs">
                 Jobs
             </NavLink>
+            <NavLink exact to="/profile">
+                Edit Profile
+            </NavLink>
         </nav>
     );
 }
 
-export default Nav;
+//FIXME ADD LOGOUT Functionality
+
+export default LoggedInNav;

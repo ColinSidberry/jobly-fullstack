@@ -1,22 +1,18 @@
 import React, { useState, useContext } from "react";
 import "./Form.css";
-import UserContext from "./UserContext";
 import FormField from "./FormField";
 import Error from "./Error";
 
-/**Handles Profile Form 
+
+/**Handles user signup 
  * 
- * Props: updateUserInfo - fn,  errors - [err1, ...]
- * State: None
- * Routes -> ProfileForm
+ * Props: signupUser - fn,  errors - [err1, ...]
+ * State: formData
+ * Routes -> SignupForm
  */
-function ProfileForm({ updateUserInfo, errors }) {
-    const { username, firstName, lastName, email } = useContext(UserContext);
-
-    const initialData = { username, firstName, lastName, email }
-
+function SignupForm({ signupUser, errors }) {
+    const initialData = { username: "", password: "", firstName: "", lastName: "", email: "" }
     const [formData, setFormData] = useState(initialData);
-
 
     function handleChange(evt) {
         const { name, value } = evt.target;
@@ -24,21 +20,21 @@ function ProfileForm({ updateUserInfo, errors }) {
             ...fData,
             [name]: value,
         }));
-    } 
+    }
 
     function handleSubmit(evt) {
         evt.preventDefault();
-        updateUserInfo(formData);
+        signupUser(formData);
     }
 
     return (
-        <form className="ProfileForm" onSubmit={handleSubmit}>
+        <form className="SignupForm" onSubmit={handleSubmit}>
             <FormField
                 inputName={"username"}
                 inputValue={formData.username}
                 labelName={"Username"}
                 handleChange={handleChange}
-                disabled={true} />
+            />
             <FormField
                 inputName={"firstName"}
                 inputValue={formData.firstName}
@@ -60,15 +56,10 @@ function ProfileForm({ updateUserInfo, errors }) {
                 labelName={"Password"}
                 handleChange={handleChange}
                 type="password" />
-            {errors.length === 0 ? null : <Error errors={errors}/>}
-            <button className="btn btn-primary">Save Changes</button>
+            {errors.length === 0 ? null : <Error errors={errors} />}
+            <button className="btn btn-primary">Sign Up!</button>
         </form>
     );
 }
 
-export default ProfileForm;
-
-
-//Make const of label:fieldName maybe we can merge type & disabled here. 
-//Then we can keep handleChange working
-//Type & disabled, input as a prop "disabled="disabled"" 
+export default SignupForm;

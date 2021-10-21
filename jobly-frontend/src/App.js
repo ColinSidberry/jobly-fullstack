@@ -1,5 +1,6 @@
-import React from "react";
-import Nav from "./Nav";
+import React, { useState } from "react";
+import LoggedInNav from "./LoggedInNav";
+import LoggedOutNav from "./LoggedOutNav";
 import Routes from "./Routes";
 import { BrowserRouter } from 'react-router-dom';
 
@@ -15,14 +16,32 @@ import { BrowserRouter } from 'react-router-dom';
 * App -> (Nav, Routes)
 */
 function App() {
-//udapteUserInfo Function 
-            //validates data, if errors->set errors , and errors are passed down
-            // App: errors = {profileErros: error}
+  const [currUser, setCurrUser] = useState(null);
+  const [token, setToken] = useState(null);
 
+  async function loginUser(formData) {
+    
+  }
+
+  async function signupUser(formData) {
+    
+  }
+
+  async function logoutUser() {
+    setCurrUser(null);
+    setToken(null); //???? 
+  }
+
+  //udapteUserInfo Function 
+  //validates data, if errors->set errors , and errors are passed down
+  // App: errors = {profileErros: error}
+  //decide user context, currUser is state
   return (
     <div>
       <BrowserRouter>
-        <Nav />
+        {currUser
+          ? <LoggedInNav />
+          : <LoggedOutNav />}
         <Routes />
       </BrowserRouter>
     </div>
