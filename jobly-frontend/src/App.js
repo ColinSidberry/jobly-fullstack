@@ -20,6 +20,8 @@ import UserContext from "./UserContext";
 function App() {
   const [currUser, setCurrUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [redirectHome, setRedirectHome] = useState(false)
+  const [redirectCompanies, setRedirectCompanies] = useState(false)
   // const initialErrors = {
   //   profileForm: null, 
   //   loginIn: null, 
@@ -29,7 +31,6 @@ function App() {
   //Question: Do we have to specify errors like above?
 
   const [errors, setErrors] = useState(null)
-  //TODO: How do we pass errors down to each of the forms
 
   //effect: set currUser when token changes
   useEffect(function fetchUserDataOnTokenChange() {
@@ -51,9 +52,7 @@ function App() {
       try {
       const token = await JoblyApi.login(formData);
       setToken(token);
-      console.log('above redirect');
-      //update state, in return Redirect
-      return <Redirect to="/companies" />
+      setRedirectCompanies(true);
     } catch (err) {
       setErrors(err);
     }
@@ -64,6 +63,7 @@ function App() {
     try {
       const token = await JoblyApi.register(formData);
       setToken(token);
+      setRedirectCompanies(true);
     } catch (err) {
       setErrors(err);
     }
@@ -73,6 +73,7 @@ function App() {
     try {
       const token = JoblyApi.logout();
       setToken(token);
+      setRedirectHome(true);
     } catch (err) {
       setErrors(err);
     }
@@ -90,6 +91,9 @@ function App() {
       setErrors(err);
     }
   }
+
+  if (redirectCompanies) return <Redirect to="/companies" />;
+  if (redirectHome) return <Redirect to="/Home" />;
 
   return (
     <div>
