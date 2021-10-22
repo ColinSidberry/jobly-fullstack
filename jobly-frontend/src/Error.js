@@ -7,12 +7,11 @@ import React from "react";
  *  (CompaniesContainer, JobsContainer, CompanyInfo) -> Error
  */
 function Error({ errors }) {
-    console.log('errors in error component', errors);
     return (
         <div>
             <b>Error fetching data:</b>
             <ul>
-                {errors.map(error => (<li>{error}</li>))}
+                {errors.map((error, idx) => (<li key={idx}>{error}</li>))}
             </ul>
         </div>
     )

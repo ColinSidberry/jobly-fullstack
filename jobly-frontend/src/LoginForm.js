@@ -1,21 +1,24 @@
-import React, { useState, useContext } from "react";
-import "./Form.css";
-import FormField from "./FormField";
-import Error from "./Error";
+import React, { useState } from "react";
 import { Redirect } from 'react-router-dom';
 
+import FormField from "./FormField";
+import Error from "./Error";
+
+import "./Form.css";
 
 /**Handles user login 
  * 
- * Props: updateUserInfo - fn,  errors - [err1, ...]
- * State: formData
+ * Props: loginUser fn, isAuthed = Boolean
+ * State: formData, [error1, ...]
+ * 
  * Routes -> LoginForm
  */
-function LoginForm({ loginUser, errors, isAuthed }) {
-    console.log('IN LOGIN FORM');
+function LoginForm({ loginUser, isAuthed }) {
+    
     const initialData = { username: "", password: "" }
     const [formData, setFormData] = useState(initialData);
-    // const [redirectCompanies, setRedirectCompanies] = useState(false)
+
+    const [errors, setErrors] = useState(null);
 
     function handleChange(evt) {
         const { name, value } = evt.target;
@@ -25,13 +28,18 @@ function LoginForm({ loginUser, errors, isAuthed }) {
         }));
     }
 
+    //could move the try catch here
     async function handleSubmit(evt) {
         evt.preventDefault();
-        await loginUser(formData);
-        console.log('About to redirect');
-        // if (loginSuccess) setRedirectCompanies(true);
+        const loginStatus = await loginUser(formData);
+        if (loginStatus === true) {
+            setErrors(null);
+        } else {
+            setErrors(loginStatus);
+        };
     }
 
+    // console.log('isAuth in LoginForm', isAuthed);
     if (isAuthed) return <Redirect to="/companies" />;
 
     return (
@@ -49,7 +57,7 @@ function LoginForm({ loginUser, errors, isAuthed }) {
                 handleChange={handleChange}
                 type="password"
             />
-            {/* {(errors) ? <Error errors={errors} /> : null} */}
+            {(errors) ? <Error errors={errors} /> : null}
             <button className="btn btn-primary">Login</button>
         </form>
     );

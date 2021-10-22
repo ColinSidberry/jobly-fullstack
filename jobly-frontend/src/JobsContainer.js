@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
+import { Redirect } from "react-router-dom";
+
+import UserContext from "./UserContext";
 import SearchForm from './SearchForm';
 import JobList from './JobList';
 import JoblyApi from "./api";
 import Error from "./Error";
+
 import "./JobsContainer.css";
-import UserContext from "./UserContext";
-import { Redirect } from "react-router-dom";
 
 /**Renders list of jobs. 
  * Calls API for list of jobs.
@@ -14,17 +16,20 @@ import { Redirect } from "react-router-dom";
  * State: jobList = [{ id, title, salary, equity, companyHandle, companyName }, ...]
  *        searchTerm = "searchTerm for job title"
  *        errors = [error1, ...]
+ * Context: Consumes UserContext
+ * 
  * Routes -> JobsContainer -> JobList
  * 
  * Location: /jobs
  */
 function JobsContainer() {
     const [jobList, setJobList] = useState(null);
-    const [errors, setErrors] = useState(null);
     const [searchTerm, setSearchTerm] = useState(null);
+    const [errors, setErrors] = useState(null);
+
     const currUser = useContext(UserContext);
 
-    //set companyList after initial and searchTerm triggered renders
+    //Upon searchTerm Change, sets companyList
     useEffect(function fetchJobsWhenMounted() {
         async function fetchJobs() {
             try {
@@ -39,7 +44,7 @@ function JobsContainer() {
 
     if(!currUser) return <Redirect to="/"/>
 
-    //handles job query search
+    //handles job search in SearchForm
     function handleSearch(search) {
         setSearchTerm(search);
     }

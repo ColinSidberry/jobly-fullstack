@@ -1,19 +1,22 @@
-import React, { useState, useContext } from "react";
-import "./Form.css";
+import React, { useState } from "react";
+import { Redirect } from 'react-router-dom';
+
 import FormField from "./FormField";
 import Error from "./Error";
-import { Redirect } from 'react-router-dom';
+
+import "./Form.css";
 
 /**Handles user signup 
  * 
- * Props: signupUser - fn,  errors - [err1, ...]
- * State: formData
+ * Props: signupUser - fn, isAuthed - boolean
+ * State: formData, errors - [err1, ...]
+ * 
  * Routes -> SignupForm
  */
-function SignupForm({ signupUser, errors, isAuthed }) {
+function SignupForm({ signupUser, isAuthed }) {
     const initialData = { username: "", password: "", firstName: "", lastName: "", email: "" }
     const [formData, setFormData] = useState(initialData);
-    // const [redirectCompanies, setRedirectCompanies] = useState(false)
+    const [errors, setErrors] = useState(null);
 
     function handleChange(evt) {
         const { name, value } = evt.target;
@@ -25,11 +28,14 @@ function SignupForm({ signupUser, errors, isAuthed }) {
 
     async function handleSubmit(evt) {
         evt.preventDefault();
-        const signupSuccess = await signupUser(formData);
-        // if (signupSuccess) setRedirectCompanies(true);
+        const signupStatus = await signupUser(formData);
+        if (signupStatus === true) {
+            setErrors(null);
+        } else {
+            setErrors(signupStatus);
+        };
     }
 
-    // if (redirectCompanies) return <Redirect to="/companies" />;
     if (isAuthed) return <Redirect to="/companies" />;
 
     return (
@@ -61,7 +67,7 @@ function SignupForm({ signupUser, errors, isAuthed }) {
                 labelName={"Password"}
                 handleChange={handleChange}
                 type="password" />
-            {/* {(errors) ? <Error errors={errors} /> : null}             */}
+            {(errors) ? <Error errors={errors} /> : null}            
             <button className="btn btn-primary">Sign Up!</button>
         </form>
     );

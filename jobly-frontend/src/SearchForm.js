@@ -1,10 +1,12 @@
 import React, {useState} from "react";
+
 import "./SearchForm.css";
 
 /**Handles Form Queries. 
  * 
  * Props: handleSearch fn
  * State: searchTerm = "searchTerm"
+ * 
  * (CompaniesContainer, JobsContainer) -> SearchForm
  */
 function SearchForm({handleSearch}) {

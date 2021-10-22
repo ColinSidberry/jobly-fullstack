@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
-import "./Home.css"
+
 import UserContext from "./UserContext";
+
+import "./Home.css"
 
 /**Renders homepage
  * Props, State: none
+ * Context: Consumes user context
  * Routes -> Home
  * Location: /
  */

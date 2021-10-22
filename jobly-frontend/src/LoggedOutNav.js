@@ -1,5 +1,6 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
+import React from "react";
+
 import "./Nav.css";
 
 /** Makes NavLinks for Navbar when user is not logged in

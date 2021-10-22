@@ -1,11 +1,12 @@
 import { React, useState, useEffect, useContext } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
+
+import UserContext from "./UserContext";
 import JobList from "./JobList";
 import JoblyApi from './api';
 import Error from "./Error";
+
 import "./CompanyInfo.css";
-import UserContext from "./UserContext";
-import { Redirect } from "react-router-dom";
 
 /**Renders company information. 
  * Calls API for company information.
@@ -13,6 +14,8 @@ import { Redirect } from "react-router-dom";
  * Props: none
  * State: company = { handle, name, description, numEmployees, logoUrl }
  *        errors = [error1, ...]
+ * Context: consumes UserContext
+ * 
  * Routes -> CompanyInfo -> JobList
  * 
  * Location: /companies/:handle
@@ -24,7 +27,7 @@ function CompanyInfo() {
 
     const { handle } = useParams();
 
-    //set company after initial and searchTerm triggered renders
+    //Upon initial render, set company to company result.
     useEffect(function getCompanyInfoOnMount() {
         async function getCompanyInfo() {
             try {

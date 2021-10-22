@@ -1,5 +1,6 @@
-import { useContext } from "react";
 import { Redirect} from "react-router-dom";
+import { useContext } from "react";
+
 import UserContext from "./UserContext";
 
 /** Renders Routes and Nav Components. 
@@ -9,6 +10,8 @@ import UserContext from "./UserContext";
 *
 * State:
 * - None
+*
+* Context: consumes UserContext
 *
 * Routes -> Logout
 */

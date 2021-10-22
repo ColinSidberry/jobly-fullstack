@@ -1,4 +1,5 @@
 import React from "react";
+
 import CompanyCard from './CompanyCard';
 
 /**Renders list of companies. 

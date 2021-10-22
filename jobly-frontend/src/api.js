@@ -17,7 +17,7 @@ class JoblyApi {
   // Remember, the backend needs to be authorized with a token
   // We're providing a token you can use to interact with the backend API
   // DON'T MODIFY THIS TOKEN
-  static token = "";
+  static token = localStorage.token;
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
@@ -82,6 +82,7 @@ class JoblyApi {
 
   /**Login user with {username, passsword}. Returns token. */
   static async login({ username, password }) {
+    console.log('in JoblyApi.js login', {username, password});
     let res = await this.request(`auth/token`, { username, password }, "post");
     this.token = res.token;
     console.log('token is: ', res.token);
@@ -90,13 +91,11 @@ class JoblyApi {
   /**Register user with { username, password, firstName, lastName, email }.
    * Returns token. */
   static async register({ username, password, firstName, lastName, email }) {
-    console.log("in api.js: register method")
     let res = await this.request(
       `auth/register`,
       { username, password, firstName, lastName, email },
       "post");
     this.token = res.token;
-    console.log('token is: ', res.token);
     return res.token;
   }
 
@@ -114,6 +113,7 @@ class JoblyApi {
   */
   static async getUser(token) {
     const username = jwt.decode(token).username;
+    console.log('user', username);
     let res = await this.request(`users/${username}`);
     return res.user;
   }
@@ -131,12 +131,14 @@ class JoblyApi {
     * output: userData - { username, firstName, lastName, isAdmin }
   */
   static async updateUser(formData) {
-    const data = {...formData}
+    console.log('updateUser in api.js');
+    const data = {...formData};
     const username = data.username;
     delete data.username;
-    console.log("username from api.js: ", username);
+    console.log("WHAT IS BEING SENT TO API", data.username, data.password);
 
     let res = await this.request(`users/${username}`, data, "patch");
+    console.log('res is:', res.user);
     return res.user;
   }
 

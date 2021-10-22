@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import LoggedInNav from "./LoggedInNav";
-import LoggedOutNav from "./LoggedOutNav";
-import Routes from "./Routes";
-import { BrowserRouter, Redirect } from 'react-router-dom';
-import JoblyApi from "./api";
-import UserContext from "./UserContext";
+import { BrowserRouter } from 'react-router-dom';
 
+import LoggedOutNav from "./LoggedOutNav";
+import LoggedInNav from "./LoggedInNav";
+import UserContext from "./UserContext";
+import Routes from "./Routes";
+import JoblyApi from "./api";
 
 /** Renders Routes and Nav Components. 
 *
@@ -13,56 +13,58 @@ import UserContext from "./UserContext";
 * - None
 *
 * State:
-* - None
+*   - currUser: {username, firstName, lastName, email}
+*   - token: string, isAuthed
+*   - isAuthed: boolean
 *
 * App -> (Nav, Routes)
 */
 function App() {
   const [currUser, setCurrUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(JoblyApi.token);
   const [isAuthed, setIsAuthed] = useState(false);
 
-  console.log('localStorage token is:', token);
-  const [errors, setErrors] = useState(null);//TODO: Consider if he errors stat should live here.
-  // const initialErrors = {
-  //   profileForm: null, 
-  //   loginIn: null, 
-  //   signupUser: null, 
-  //   userData:null
-  // }
-  //Question: Do we have to specify errors like above?
-
-
-  // effect: set currUser when token changes
+  /** Upon token change, set currUser to user obj & isAuthed to true
+   * input: none
+   * output: [errors,...]
+   */
   useEffect(function fetchUserDataOnTokenChange() {
     async function fetchUserData() {
       try {
-        console.log('fetch user data in App is running')
+        console.log('fetch user data in App is running, token:', token)
         const userData = await JoblyApi.getUser(token);
-        delete userData.jobs; //don't need jobList in context/currUser
+        delete userData.jobs; //TODO: assess how to update jobList when apply button is clicked in JobCard.
         setCurrUser(userData);
         setIsAuthed(true);
       } catch (err) {
-        setErrors(err);
+        return err;
       }
     }
-    console.log('token above ')
     if (token) fetchUserData();
   }, [token]);
 
+  /**Logs in user. Upon success, sets token to user's token.
+   * input: {username, password}
+   * output: true or [errors,...]
+   */
   async function loginUser(formData) {
     console.log('login user in App is running');
     try {
+      console.log('inloginUser', formData); //FIXME
       const token = await JoblyApi.login(formData);
       setToken(token);
       localStorage.setItem('token', token);
-      console.log('localStorage AFTER LOGIN token is:', token);
       return true;
+
     } catch (err) {
-      setErrors(err);
+      return err
     }
   }
 
+  /**Signs Up user. Upon success, sets token to user's token.
+   * input: {username, password, firstName, lastName, email}
+   * output: true or [errors,...]
+   */
   async function signupUser(formData) {
     console.log('signup user in App is running');
     try {
@@ -70,53 +72,56 @@ function App() {
       setToken(token);
       localStorage.setItem('token', token);
       return true;
+
     } catch (err) {
-      setErrors(err);
+      return err;
     }
   }
 
+ /**Logs out user. Upon success, sets token to null & clears localStorage.token.
+   * input: none
+   * output: [errors,...]
+   */
   async function logoutUser() {
     try {
       const token = JoblyApi.logout();
       setToken(token);
       localStorage.removeItem('token');
-      setCurrUser(null); //Question: is this the best way to change currUser on logout? Given the setting is in two places.
+      setCurrUser(null);
       setIsAuthed(false);
     } catch (err) {
-      setErrors(err);
+      return err;
     }
   }
 
-  //udapteUserInfo Function 
-  //validates data, if errors->set errors , and errors are passed down
-  //decide user context, currUser is state
+ /**Updates a user's info. Upon success, sets CurrUser to userData.
+   * input: {username, firstName, lastName, email, password}
+   * output: true or [errors,...]
+   */
   async function updateUserInfo(formData) {
     try {
-      console.log("formData from App.js: ", formData);
       const userData = await JoblyApi.updateUser(formData);
       delete userData.jobs; //don't need jobList in context/currUser
       setCurrUser(userData);
       return true;
-      //TODO: Maybe return value to trigger the successfully updated profile info message in PRofileForm.js
-      //FIXME: SHOW USER UPDATE SUCCESS MSG.
+
     } catch (err) {
-      setErrors(err);
       return err;
-      // return err; //TODO: Does this design work to better handle errors
     }
   }
 
-  // if (redirectHome) return <Redirect to="/Home" />;
-  console.log("above return currUser:", currUser);
-  console.log("above return localStorage.token:", localStorage);
-  console.log("above return token:", token);
+  // console.log("above return currUser:", currUser);
+  // console.log("above return localStorage.token:", localStorage);
+  // console.log("above return token:", token);
+
+  //protects route upon refresh as currUser loads during effect.
   if (token && !currUser) return <h3>Loading... </h3>
-  console.log('about to return routes');
+  
   return (
     <div>
       <UserContext.Provider value={currUser}>
         <BrowserRouter>
-          {localStorage.token
+          {token
             ? <LoggedInNav username={currUser.username} />
             : <LoggedOutNav />}
           <Routes
@@ -124,7 +129,6 @@ function App() {
             signupUser={signupUser}
             logoutUser={logoutUser}
             updateUserInfo={updateUserInfo}
-            errors={errors}
             isAuthed={isAuthed}
           />
         </BrowserRouter>

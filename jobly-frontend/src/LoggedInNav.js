@@ -1,14 +1,12 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
+import React from "react";
+
 import "./Nav.css";
 
 /** Makes NavLinks for Navbar when user is logged in
 *
-* Props:
-* - None
-*
-* State:
-* - None
+* Props: username - "testuser"
+* State: None
 *
 * App -> LoggedInNav
 */
@@ -33,7 +31,5 @@ function LoggedInNav({ username }) {
         </nav>
     );
 }
-
-//FIXME ADD LOGOUT Functionality
 
 export default LoggedInNav;
