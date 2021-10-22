@@ -30,7 +30,7 @@ function ProfileForm({ updateUserInfo, errors }) {
         evt.preventDefault();
         updateUserInfo(formData);
     }
-
+//FIXME: React says: A component is changing a controlled input to be uncontrolled. This is likely caused by the value changing from a defined to undefined, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component.
     return (
         <form className="ProfileForm" onSubmit={handleSubmit}>
             <FormField
@@ -61,6 +61,7 @@ function ProfileForm({ updateUserInfo, errors }) {
                 handleChange={handleChange}
                 type="password" />
                 {(errors) ? <Error errors={errors} /> : null}
+            {/* {changes && <h6>Changes Saved</h6>} */}
             <button className="btn btn-primary">Save Changes</button>
         </form>
     );

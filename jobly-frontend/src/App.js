@@ -20,8 +20,7 @@ import UserContext from "./UserContext";
 function App() {
   const [currUser, setCurrUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [redirectHome, setRedirectHome] = useState(false)
-  const [redirectCompanies, setRedirectCompanies] = useState(false)
+  const [errors, setErrors] = useState(null);//TODO: Consider if he errors stat should live here.
   // const initialErrors = {
   //   profileForm: null, 
   //   loginIn: null, 
@@ -30,7 +29,6 @@ function App() {
   // }
   //Question: Do we have to specify errors like above?
 
-  const [errors, setErrors] = useState(null)
 
   //effect: set currUser when token changes
   useEffect(function fetchUserDataOnTokenChange() {
@@ -62,7 +60,7 @@ function App() {
     try {
       const token = await JoblyApi.register(formData);
       setToken(token);
-      setRedirectCompanies(true);
+
     } catch (err) {
       setErrors(err);
     }
@@ -72,7 +70,7 @@ function App() {
     try {
       const token = JoblyApi.logout();
       setToken(token);
-      setRedirectHome(true);
+      setCurrUser(null); //Question: is this the best way to change currUser on logout? Given the setting is in two places.
     } catch (err) {
       setErrors(err);
     }
@@ -83,16 +81,19 @@ function App() {
   //decide user context, currUser is state
   async function updateUserInfo(formData) {
     try {
+      console.log("formData from App.js: ", formData);
       const userData = await JoblyApi.updateUser(formData);
       setCurrUser(userData);
+      //TODO: Maybe return value to trigger the successfully updated profile info message in PRofileForm.js
       //FIXME: SHOW USER UPDATE SUCCESS MSG.
     } catch (err) {
       setErrors(err);
+      // return err; //TODO: Does this design work to better handle errors
     }
   }
 
   // if (redirectHome) return <Redirect to="/Home" />;
-
+console.log("currUser:", currUser);
   return (
     <div>
       <UserContext.Provider value={currUser}>

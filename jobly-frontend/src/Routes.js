@@ -7,6 +7,7 @@ import CompanyInfo from "./CompanyInfo";
 import ProfileForm from "./ProfileForm";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
+import Logout from "./Logout";
 
 /** Renders Routes for CompaniesContainer, CompanyInfo, JobsContainer, Home
 *
@@ -39,6 +40,9 @@ function Routes({ loginUser, signupUser, logoutUser, updateUserInfo, errors }) {
             </Route>
             <Route exact path="/jobs">
                 <JobsContainer />
+            </Route>
+            <Route exact path="/logout">
+                <Logout logoutUser={logoutUser} />
             </Route>
             <Route exact path="/">
                 <Home />
