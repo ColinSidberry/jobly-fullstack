@@ -11,11 +11,11 @@ import { Redirect } from 'react-router-dom';
  * State: formData
  * Routes -> LoginForm
  */
-function LoginForm({ loginUser, errors }) {
+function LoginForm({ loginUser, errors, isAuthed }) {
     console.log('IN LOGIN FORM');
     const initialData = { username: "", password: "" }
     const [formData, setFormData] = useState(initialData);
-    const [redirectCompanies, setRedirectCompanies] = useState(false)
+    // const [redirectCompanies, setRedirectCompanies] = useState(false)
 
     function handleChange(evt) {
         const { name, value } = evt.target;
@@ -25,13 +25,14 @@ function LoginForm({ loginUser, errors }) {
         }));
     }
 
-    function handleSubmit(evt) {
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        loginUser(formData);
-        setRedirectCompanies(true);
+        await loginUser(formData);
+        console.log('About to redirect');
+        // if (loginSuccess) setRedirectCompanies(true);
     }
 
-    if (redirectCompanies) return <Redirect to="/companies" />;
+    if (isAuthed) return <Redirect to="/companies" />;
 
     return (
         <form className="LoginForm" onSubmit={handleSubmit}>

@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useState, useContext} from "react";
 import JobCard from "./JobCard";
+import UserContext from "./UserContext";
+import JoblyApi from './api';
 
 /**Renders list of jobs. 
  * 
@@ -10,9 +12,27 @@ import JobCard from "./JobCard";
  * 
  */
 function JobList({ jobList }) {
+    // const user = useContext(UserContext);
+    // async function getInitialJobs() {
+    //     return await JoblyApi.getUserJobs(user.username);
+    // }
+    // //1) Determine what API is giving back for .jobs / .applications? (should be job_id)
+    // //2) Create new set for lookup
+    // //3) Create handleApply function to pass down to jobCard
+    //     //a) API call to add to applications for user
+    //     //b) Either re-call the api or, could use an effect. tbd.
+    
+    // const [userJobList, setUserJobList] = useState(getInitialJobs());
+
+
     return (
         // FIXME
+        //ConsumeContext(username) --> getJobsApplied --> make as Set
         //State: Get list of jobs user has applied to
+        
+        //fn to call the api to apply
+        //appStatus: true/false as prop to JobCard
+
         // if job user applied to in job list
             // pass in true to applied prop
         // else

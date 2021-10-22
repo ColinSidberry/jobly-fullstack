@@ -7,7 +7,6 @@ function FormField({
     handleChange,
     type = "text",
     disabled = false }) {
-    console.log('IN FORM FIELD', {inputName, inputValue, labelName});
     return (
         <div>
             <label htmlFor={inputName}>{`${labelName}: `}</label>

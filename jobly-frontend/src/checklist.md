@@ -1,5 +1,5 @@
 ToDos:
-
+1) Protect companies & jobs routes
 
 
 
@@ -10,6 +10,7 @@ ToDos:
 5) Check token update thing?
 6) Refreshing?
 7) Refactor JobList so that the searching for jobs is a constant lookup time???
+8) Errors need to be moved within each page instead of being passed down through App. 
 ...
 ...
 10) styling

@@ -20,11 +20,11 @@ import Logout from "./Logout";
 * App -> Routes -> 
 * (Home, CompaniesContainer, Company, JobsContainer, LoginForm, SignupForm, ProfileForm)
 */
-function Routes({ loginUser, signupUser, logoutUser, updateUserInfo, errors }) {
+function Routes({ loginUser, signupUser, logoutUser, updateUserInfo, errors, isAuthed }) {
     return (
         <Switch>
             <Route exact path="/login" >
-                <LoginForm loginUser={loginUser} errors={errors} />
+                <LoginForm loginUser={loginUser} errors={errors} isAuthed={isAuthed}/>
             </Route>
             <Route exact path="/signup">
                 <SignupForm signupUser={signupUser} errors={errors} />

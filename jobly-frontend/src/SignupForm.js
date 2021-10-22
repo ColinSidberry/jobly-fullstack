@@ -23,10 +23,10 @@ function SignupForm({ signupUser, errors }) {
         }));
     }
 
-    function handleSubmit(evt) {
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        signupUser(formData);
-        setRedirectCompanies(true);
+        const signupSuccess = await signupUser(formData);
+        if (signupSuccess) setRedirectCompanies(true);
     }
 
     if (redirectCompanies) return <Redirect to="/companies" />;
