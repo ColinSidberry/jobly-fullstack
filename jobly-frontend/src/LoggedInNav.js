@@ -12,7 +12,7 @@ import "./Nav.css";
 *
 * App -> LoggedInNav
 */
-function LoggedInNav() {
+function LoggedInNav({ username }) {
     return (
         <nav className="Nav">
             <NavLink exact to="/">
@@ -26,6 +26,9 @@ function LoggedInNav() {
             </NavLink>
             <NavLink exact to="/profile">
                 Edit Profile
+            </NavLink>
+            <NavLink exact to="/logout">
+                Logout of {username}
             </NavLink>
         </nav>
     );

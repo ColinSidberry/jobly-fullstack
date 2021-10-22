@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import LoggedInNav from "./LoggedInNav";
 import LoggedOutNav from "./LoggedOutNav";
 import Routes from "./Routes";
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Redirect } from 'react-router-dom';
 import JoblyApi from "./api";
 import UserContext from "./UserContext";
 
@@ -35,6 +35,7 @@ function App() {
   useEffect(function fetchUserDataOnTokenChange() {
     async function fetchUserData() {
       try {
+        console.log('fetch user data in App is running')
         const userData = await JoblyApi.getUser(token);
         setCurrUser(userData);
       } catch (err) {
@@ -42,19 +43,24 @@ function App() {
 
       }
     }
-    fetchUserData();
+    if (token) fetchUserData();
   }, [token]);
 
   async function loginUser(formData) {
-    try {
+    console.log('login user in App is running');
+      try {
       const token = await JoblyApi.login(formData);
       setToken(token);
+      console.log('above redirect');
+      //update state, in return Redirect
+      return <Redirect to="/companies" />
     } catch (err) {
       setErrors(err);
     }
   }
 
   async function signupUser(formData) {
+    console.log('signup user in App is running');
     try {
       const token = await JoblyApi.register(formData);
       setToken(token);
@@ -75,22 +81,30 @@ function App() {
   //udapteUserInfo Function 
   //validates data, if errors->set errors , and errors are passed down
   //decide user context, currUser is state
-  function updateUserInfo()
+  async function updateUserInfo(formData) {
+    try {
+      const userData = await JoblyApi.updateUser(formData);
+      setCurrUser(userData);
+      //FIXME: SHOW USER UPDATE SUCCESS MSG.
+    } catch (err) {
+      setErrors(err);
+    }
+  }
 
   return (
     <div>
       <UserContext.Provider value={currUser}>
         <BrowserRouter>
           {currUser
-            ? <LoggedInNav 
-                updateUserInfo={updateUserInfo} 
-                logoutUser={logoutUser}
-                errors={errors}/> 
-            : <LoggedOutNav
-                signupUser={signupUser}
-                loginUser={loginUser} 
-                errors={errors}/>}
-          <Routes />
+            ? <LoggedInNav username={currUser.username} />
+            : <LoggedOutNav />}
+          <Routes
+            loginUser={loginUser}
+            signupUser={signupUser}
+            logoutUser={logoutUser}
+            updateUserInfo={updateUserInfo}
+            errors={errors}
+          />
         </BrowserRouter>
       </UserContext.Provider>
     </div>

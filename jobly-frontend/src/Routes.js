@@ -19,16 +19,30 @@ import LoginForm from "./LoginForm";
 * App -> Routes -> 
 * (Home, CompaniesContainer, Company, JobsContainer, LoginForm, SignupForm, ProfileForm)
 */
-function Routes() {
+function Routes({ loginUser, signupUser, logoutUser, updateUserInfo, errors }) {
     return (
         <Switch>
-            <Route exact path="/login"><LoginForm /></Route>
-            <Route exact path="/signup"><SignupForm /></Route>
-            <Route exact path="/profile"><ProfileForm /></Route>
-            <Route exact path="/companies"><CompaniesContainer /></Route>
-            <Route exact path="/companies/:handle"><CompanyInfo /></Route>
-            <Route exact path="/jobs"><JobsContainer /></Route>
-            <Route exact path="/"><Home /></Route>
+            <Route exact path="/login" >
+                <LoginForm loginUser={loginUser} errors={errors} />
+            </Route>
+            <Route exact path="/signup">
+                <SignupForm signupUser={signupUser} errors={errors} />
+            </Route>
+            <Route exact path="/profile">
+                <ProfileForm updateUserInfo={updateUserInfo} errors={errors} />
+            </Route>
+            <Route exact path="/companies">
+                <CompaniesContainer />
+            </Route>
+            <Route exact path="/companies/:handle">
+                <CompanyInfo />
+            </Route>
+            <Route exact path="/jobs">
+                <JobsContainer />
+            </Route>
+            <Route exact path="/">
+                <Home />
+            </Route>
             <Redirect to="/" />
         </Switch>
     );

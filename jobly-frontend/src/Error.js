@@ -7,7 +7,7 @@ import React from "react";
  *  (CompaniesContainer, JobsContainer, CompanyInfo) -> Error
  */
 function Error({ errors }) {
-    console.log(errors);
+    console.log('errors in error component', errors);
     return (
         <div>
             <b>Error fetching data:</b>

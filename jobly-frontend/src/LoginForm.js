@@ -11,6 +11,7 @@ import Error from "./Error";
  * Routes -> LoginForm
  */
 function LoginForm({ loginUser, errors }) {
+    console.log('IN LOGIN FORM');
     const initialData = { username: "", password: "" }
     const [formData, setFormData] = useState(initialData);
 
@@ -26,6 +27,7 @@ function LoginForm({ loginUser, errors }) {
         evt.preventDefault();
         loginUser(formData);
     }
+    console.log('errors in LoginForm BEFORE RETURN', errors);
 
     return (
         <form className="LoginForm" onSubmit={handleSubmit}>
@@ -42,7 +44,7 @@ function LoginForm({ loginUser, errors }) {
                 handleChange={handleChange}
                 type="password"
             />
-            {errors.length === 0 ? null : <Error errors={errors} />}
+            {(errors) ? <Error errors={errors} /> : null}
             <button className="btn btn-primary">Login</button>
         </form>
     );

@@ -1,6 +1,5 @@
 import React from "react";
 
-//FIXME:pass in type as property. For disabled, move logi
 function FormField({
     inputName,
     inputValue,
@@ -8,9 +7,10 @@ function FormField({
     handleChange,
     type = "text",
     disabled = false }) {
+    console.log('IN FORM FIELD', {inputName, inputValue, labelName});
     return (
         <div>
-            <label htmlFor={inputName}>{labelName}</label>
+            <label htmlFor={inputName}>{`${labelName}: `}</label>
             <input
                 id={inputName}
                 name={inputName}

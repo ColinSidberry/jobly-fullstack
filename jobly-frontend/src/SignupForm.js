@@ -56,8 +56,7 @@ function SignupForm({ signupUser, errors }) {
                 labelName={"Password"}
                 handleChange={handleChange}
                 type="password" />
-            {errors.length === 0 ? null : <Error errors={errors} />}
-            <button className="btn btn-primary">Sign Up!</button>
+            {(errors) ? <Error errors={errors} /> : null}            <button className="btn btn-primary">Sign Up!</button>
         </form>
     );
 }

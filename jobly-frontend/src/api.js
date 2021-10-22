@@ -84,7 +84,7 @@ class JoblyApi {
 
   /**Login user with {username, passsword}. Returns token. */
   static async login({ username, password }) {
-    let res = await this.request(`/auth/token`, { username, password }, "post");
+    let res = await this.request(`auth/token`, { username, password }, "post");
     this.token = res.token;
     console.log('token is: ', res.token);
     return res.token;
@@ -93,7 +93,7 @@ class JoblyApi {
    * Returns token. */
   static async register({ username, password, firstName, lastName, email }) {
     let res = await this.request(
-      `/auth/register`,
+      `auth/register`,
       { username, password, firstName, lastName, email },
       "post");
     this.token = res.token;
@@ -115,7 +115,7 @@ class JoblyApi {
   */
   static async getUser(token) {
     const username = jwt.decode(token).username;
-    let res = await this.request(`/users/${username}`);
+    let res = await this.request(`users/${username}`);
     return res.user;
   }
 
@@ -127,7 +127,7 @@ class JoblyApi {
     const { username } = formData;
     delete formData[username];
 
-    let res = await this.request(`/users/${username}`, formData, "patch");
+    let res = await this.request(`users/${username}`, formData, "patch");
     return res.user;
   }
 }

@@ -60,7 +60,7 @@ function ProfileForm({ updateUserInfo, errors }) {
                 labelName={"Password"}
                 handleChange={handleChange}
                 type="password" />
-            {errors.length === 0 ? null : <Error errors={errors}/>}
+                {(errors) ? <Error errors={errors} /> : null}
             <button className="btn btn-primary">Save Changes</button>
         </form>
     );
