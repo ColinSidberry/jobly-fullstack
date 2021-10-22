@@ -1,9 +1,11 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import JobList from "./JobList";
 import JoblyApi from './api';
 import Error from "./Error";
 import "./CompanyInfo.css";
+import UserContext from "./UserContext";
+import { Redirect } from "react-router-dom";
 
 /**Renders company information. 
  * Calls API for company information.
@@ -18,6 +20,7 @@ import "./CompanyInfo.css";
 function CompanyInfo() {
     const [company, setCompany] = useState(null);
     const [errors, setErrors] = useState(null);
+    const currUser = useContext(UserContext);
 
     const { handle } = useParams();
 
@@ -34,6 +37,8 @@ function CompanyInfo() {
         }
         getCompanyInfo();
     }, []);
+
+    if(!currUser) return <Redirect to="/"/>
 
     if (errors) return <Error errors={errors} />
     else if (!company) return <i>Loading...</i>

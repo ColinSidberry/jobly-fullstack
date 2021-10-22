@@ -10,10 +10,10 @@ import { Redirect } from 'react-router-dom';
  * State: formData
  * Routes -> SignupForm
  */
-function SignupForm({ signupUser, errors }) {
+function SignupForm({ signupUser, errors, isAuthed }) {
     const initialData = { username: "", password: "", firstName: "", lastName: "", email: "" }
     const [formData, setFormData] = useState(initialData);
-    const [redirectCompanies, setRedirectCompanies] = useState(false)
+    // const [redirectCompanies, setRedirectCompanies] = useState(false)
 
     function handleChange(evt) {
         const { name, value } = evt.target;
@@ -26,10 +26,11 @@ function SignupForm({ signupUser, errors }) {
     async function handleSubmit(evt) {
         evt.preventDefault();
         const signupSuccess = await signupUser(formData);
-        if (signupSuccess) setRedirectCompanies(true);
+        // if (signupSuccess) setRedirectCompanies(true);
     }
 
-    if (redirectCompanies) return <Redirect to="/companies" />;
+    // if (redirectCompanies) return <Redirect to="/companies" />;
+    if (isAuthed) return <Redirect to="/companies" />;
 
     return (
         <form className="SignupForm" onSubmit={handleSubmit}>
@@ -60,7 +61,8 @@ function SignupForm({ signupUser, errors }) {
                 labelName={"Password"}
                 handleChange={handleChange}
                 type="password" />
-            {(errors) ? <Error errors={errors} /> : null}            <button className="btn btn-primary">Sign Up!</button>
+            {/* {(errors) ? <Error errors={errors} /> : null}             */}
+            <button className="btn btn-primary">Sign Up!</button>
         </form>
     );
 }

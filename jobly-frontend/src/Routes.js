@@ -27,10 +27,10 @@ function Routes({ loginUser, signupUser, logoutUser, updateUserInfo, errors, isA
                 <LoginForm loginUser={loginUser} errors={errors} isAuthed={isAuthed}/>
             </Route>
             <Route exact path="/signup">
-                <SignupForm signupUser={signupUser} errors={errors} />
+                <SignupForm signupUser={signupUser} errors={errors} isAuthed={isAuthed}/>
             </Route>
             <Route exact path="/profile">
-                <ProfileForm updateUserInfo={updateUserInfo} errors={errors} />
+                <ProfileForm updateUserInfo={updateUserInfo} />
             </Route>
             <Route exact path="/companies">
                 <CompaniesContainer />

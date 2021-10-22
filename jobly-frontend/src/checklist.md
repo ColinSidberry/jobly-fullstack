@@ -1,16 +1,16 @@
 ToDos:
-1) Protect companies & jobs routes
+
+1) bug in retrieving localStorage
 
 
 
-
-4) Add Applying to jobs functionality.
+2) Add Applying to jobs functionality.
     JobList Applied / not applied
     Button disabled/not disabled
-5) Check token update thing?
-6) Refreshing?
-7) Refactor JobList so that the searching for jobs is a constant lookup time???
-8) Errors need to be moved within each page instead of being passed down through App. 
+3) Check token update thing?
+4) Refreshing?
+5) Refactor JobList so that the searching for jobs is a constant lookup time???
+6) Errors need to be moved within each page instead of being passed down through App. 
 ...
 ...
 10) styling

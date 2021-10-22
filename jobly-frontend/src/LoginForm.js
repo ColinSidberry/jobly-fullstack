@@ -49,7 +49,7 @@ function LoginForm({ loginUser, errors, isAuthed }) {
                 handleChange={handleChange}
                 type="password"
             />
-            {(errors) ? <Error errors={errors} /> : null}
+            {/* {(errors) ? <Error errors={errors} /> : null} */}
             <button className="btn btn-primary">Login</button>
         </form>
     );

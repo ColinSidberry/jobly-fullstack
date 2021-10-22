@@ -131,11 +131,12 @@ class JoblyApi {
     * output: userData - { username, firstName, lastName, isAdmin }
   */
   static async updateUser(formData) {
-    const username = formData.username;
-    delete formData.username;
+    const data = {...formData}
+    const username = data.username;
+    delete data.username;
     console.log("username from api.js: ", username);
 
-    let res = await this.request(`users/${username}`, formData, "patch");
+    let res = await this.request(`users/${username}`, data, "patch");
     return res.user;
   }
 

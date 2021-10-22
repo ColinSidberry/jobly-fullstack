@@ -1,4 +1,6 @@
-import { Redirect } from "react-router-dom";
+import { useContext } from "react";
+import { Redirect} from "react-router-dom";
+import UserContext from "./UserContext";
 
 /** Renders Routes and Nav Components. 
 *
@@ -11,6 +13,8 @@ import { Redirect } from "react-router-dom";
 * Routes -> Logout
 */
 function Logout({ logoutUser }) {
+    const currUser = useContext(UserContext);
+    if(!currUser) return <Redirect to="/"/>
     logoutUser();
 
     return <Redirect to="/" />;

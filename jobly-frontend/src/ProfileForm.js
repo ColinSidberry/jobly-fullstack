@@ -10,12 +10,13 @@ import Error from "./Error";
  * State: None
  * Routes -> ProfileForm
  */
-function ProfileForm({ updateUserInfo, errors }) {
+function ProfileForm({ updateUserInfo }) {
     const { username, firstName, lastName, email } = useContext(UserContext);
 
     const initialData = { username, firstName, lastName, email }
-
     const [formData, setFormData] = useState(initialData);
+    const [changes, setChanges] = useState(false);
+    const [errors, setErrors] = useState(null);
 
 
     function handleChange(evt) {
@@ -24,13 +25,21 @@ function ProfileForm({ updateUserInfo, errors }) {
             ...fData,
             [name]: value,
         }));
-    } 
-
-    function handleSubmit(evt) {
-        evt.preventDefault();
-        updateUserInfo(formData);
     }
-//FIXME: React says: A component is changing a controlled input to be uncontrolled. This is likely caused by the value changing from a defined to undefined, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component.
+
+    async function handleSubmit(evt) {
+        evt.preventDefault();
+        //get re
+        const updateStatus = await updateUserInfo(formData)
+        if (updateStatus === true) {
+            setChanges(true);
+        }else{
+            console.log("errors is a: ...", updateStatus);
+            setErrors(updateStatus);
+        };
+    }
+
+    //FIXME: React says: A component is changing a controlled input to be uncontrolled. This is likely caused by the value changing from a defined to undefined, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component.
     return (
         <form className="ProfileForm" onSubmit={handleSubmit}>
             <FormField
@@ -60,8 +69,8 @@ function ProfileForm({ updateUserInfo, errors }) {
                 labelName={"Password"}
                 handleChange={handleChange}
                 type="password" />
-                {(errors) ? <Error errors={errors} /> : null}
-            {/* {changes && <h6>Changes Saved</h6>} */}
+            {(errors) ? <Error errors={errors} /> : null}
+            {changes && <h6>Changes Saved</h6>}
             <button className="btn btn-primary">Save Changes</button>
         </form>
     );

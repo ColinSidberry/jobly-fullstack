@@ -96,10 +96,12 @@ function App() {
       const userData = await JoblyApi.updateUser(formData);
       delete userData.jobs; //don't need jobList in context/currUser
       setCurrUser(userData);
+      return true;
       //TODO: Maybe return value to trigger the successfully updated profile info message in PRofileForm.js
       //FIXME: SHOW USER UPDATE SUCCESS MSG.
     } catch (err) {
       setErrors(err);
+      return err;
       // return err; //TODO: Does this design work to better handle errors
     }
   }
