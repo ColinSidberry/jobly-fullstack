@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import "./Form.css";
 import FormField from "./FormField";
 import Error from "./Error";
-
+import { Redirect } from 'react-router-dom';
 
 /**Handles user signup 
  * 
@@ -13,6 +13,7 @@ import Error from "./Error";
 function SignupForm({ signupUser, errors }) {
     const initialData = { username: "", password: "", firstName: "", lastName: "", email: "" }
     const [formData, setFormData] = useState(initialData);
+    const [redirectCompanies, setRedirectCompanies] = useState(false)
 
     function handleChange(evt) {
         const { name, value } = evt.target;
@@ -25,7 +26,10 @@ function SignupForm({ signupUser, errors }) {
     function handleSubmit(evt) {
         evt.preventDefault();
         signupUser(formData);
+        setRedirectCompanies(true);
     }
+
+    if (redirectCompanies) return <Redirect to="/companies" />;
 
     return (
         <form className="SignupForm" onSubmit={handleSubmit}>

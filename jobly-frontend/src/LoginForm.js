@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import "./Form.css";
 import FormField from "./FormField";
 import Error from "./Error";
+import { Redirect } from 'react-router-dom';
 
 
 /**Handles user login 
@@ -14,6 +15,7 @@ function LoginForm({ loginUser, errors }) {
     console.log('IN LOGIN FORM');
     const initialData = { username: "", password: "" }
     const [formData, setFormData] = useState(initialData);
+    const [redirectCompanies, setRedirectCompanies] = useState(false)
 
     function handleChange(evt) {
         const { name, value } = evt.target;
@@ -26,8 +28,10 @@ function LoginForm({ loginUser, errors }) {
     function handleSubmit(evt) {
         evt.preventDefault();
         loginUser(formData);
+        setRedirectCompanies(true);
     }
-    console.log('errors in LoginForm BEFORE RETURN', errors);
+
+    if (redirectCompanies) return <Redirect to="/companies" />;
 
     return (
         <form className="LoginForm" onSubmit={handleSubmit}>

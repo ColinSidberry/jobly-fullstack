@@ -52,7 +52,6 @@ function App() {
       try {
       const token = await JoblyApi.login(formData);
       setToken(token);
-      setRedirectCompanies(true);
     } catch (err) {
       setErrors(err);
     }
@@ -92,8 +91,7 @@ function App() {
     }
   }
 
-  if (redirectCompanies) return <Redirect to="/companies" />;
-  if (redirectHome) return <Redirect to="/Home" />;
+  // if (redirectHome) return <Redirect to="/Home" />;
 
   return (
     <div>
