@@ -26,6 +26,7 @@ function App() {
   const [currUser, setCurrUser] = useState(null);
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [isAuthed, setIsAuthed] = useState(false);
+  
 
   console.debug(
     "App",
