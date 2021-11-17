@@ -113,8 +113,9 @@ class JoblyApi {
   */
   static async getUser(token) {
     const username = jwt.decode(token).username;
-    console.log('user', username);
+    console.log({username});
     let res = await this.request(`users/${username}`);
+    console.log({ res });
     return res.user;
   }
   /** Gets user jobs

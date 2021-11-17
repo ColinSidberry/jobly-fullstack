@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter } from 'react-router-dom';
+import useLocalStorage from "./hooks/useLocalStorage";
 
 import LoggedOutNav from "./LoggedOutNav";
 import LoggedInNav from "./LoggedInNav";
 import UserContext from "./UserContext";
 import Routes from "./Routes";
 import JoblyApi from "./api";
+
+export const TOKEN_STORAGE_ID = "jobly-token";
 
 /** Renders Routes and Nav Components. 
 *
@@ -21,18 +24,26 @@ import JoblyApi from "./api";
 */
 function App() {
   const [currUser, setCurrUser] = useState(null);
-  const [token, setToken] = useState(JoblyApi.token);
+  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [isAuthed, setIsAuthed] = useState(false);
+
+  console.debug(
+    "App",
+    "currUser=", currUser,
+    "token=", token,
+    "isAuthed=", isAuthed,
+  );
 
   /** Upon token change, set currUser to user obj & isAuthed to true
    * input: none
    * output: [errors,...]
    */
   useEffect(function fetchUserDataOnTokenChange() {
+    console.debug("App useEffect loadUserInfo", "token=", token);
     async function fetchUserData() {
       try {
-        console.log('fetch user data in App is running, token:', token)
         const userData = await JoblyApi.getUser(token);
+        console.log({userData});
         delete userData.jobs; //TODO: assess how to update jobList when apply button is clicked in JobCard.
         setCurrUser(userData);
         setIsAuthed(true);
@@ -115,6 +126,7 @@ function App() {
   // console.log("above return token:", token);
 
   //protects route upon refresh as currUser loads during effect.
+  console.log({token},{currUser});
   if (token && !currUser) return <h3>Loading... </h3>
   
   return (
