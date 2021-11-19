@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import CompaniesContainer from "./CompaniesContainer";
-import CompanyInfo from "./CompanyInfo";
-import JobsContainer from "./JobsContainer";
-import ProfileForm from "./ProfileForm";
-import SignupForm from "./SignupForm";
-import LoginForm from "./LoginForm";
-import Logout from "./Logout";
-import Home from "./Home";
+import CompaniesContainer from "../companies/CompaniesContainer";
+import CompanyInfo from "../companies/CompanyInfo";
+import JobsContainer from "../jobs/JobsContainer";
+import ProfileForm from "../profile/ProfileForm";
+import SignupForm from "../auth/SignupForm";
+import LoginForm from "../auth/LoginForm";
+import Logout from "../auth/Logout";
+import Home from "../homepage/Home";
 
 /** Renders Routes
 *

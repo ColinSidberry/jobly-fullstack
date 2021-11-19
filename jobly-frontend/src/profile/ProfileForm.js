@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 
-import UserContext from "./UserContext";
-import FormField from "./FormField";
-import Error from "./Error";
+import UserContext from "../auth/UserContext";
+import FormField from "../common/FormField";
+import Error from "../common/Error";
 
-import "./Form.css";
+import "../auth/Form.css";
 
 /**Handles Profile Form 
  * 

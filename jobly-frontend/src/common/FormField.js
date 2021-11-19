@@ -9,8 +9,9 @@ function FormField({
     disabled = false }) {
     return (
         <div>
-            <label htmlFor={inputName}>{`${labelName}: `}</label>
+            <label className="form-label" htmlFor={inputName}>{`${labelName}: `}</label>
             <input
+                className="form-control"
                 id={inputName}
                 name={inputName}
                 value={inputValue}

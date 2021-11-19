@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter } from 'react-router-dom';
 import useLocalStorage from "./hooks/useLocalStorage";
 
-import LoggedOutNav from "./LoggedOutNav";
-import LoggedInNav from "./LoggedInNav";
-import UserContext from "./UserContext";
-import Routes from "./Routes";
-import JoblyApi from "./api";
+import LoggedOutNav from "./nav-routes/LoggedOutNav";
+import LoggedInNav from "./nav-routes/LoggedInNav";
+import UserContext from "./auth/UserContext";
+import Routes from "./nav-routes/Routes";
+import JoblyApi from "./api/api";
 
 export const TOKEN_STORAGE_ID = "jobly-token";
 
@@ -26,7 +26,7 @@ function App() {
   const [currUser, setCurrUser] = useState(null);
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
   const [isAuthed, setIsAuthed] = useState(false);
-  
+
 
   console.debug(
     "App",

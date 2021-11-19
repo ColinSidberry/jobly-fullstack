@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
-import UserContext from "./UserContext";
-import SearchForm from './SearchForm';
+import UserContext from "../auth/UserContext";
+import SearchForm from '../common/SearchForm';
 import JobList from './JobList';
-import JoblyApi from "./api";
-import Error from "./Error";
+import JoblyApi from "../api/api";
+import Error from "../common/Error";
 
 import "./JobsContainer.css";
 

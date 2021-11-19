@@ -1,10 +1,10 @@
 import { React, useState, useEffect, useContext } from "react";
 import { useParams, Redirect } from 'react-router-dom';
 
-import UserContext from "./UserContext";
-import JobList from "./JobList";
-import JoblyApi from './api';
-import Error from "./Error";
+import UserContext from "../auth/UserContext";
+import JobList from "../jobs/JobList";
+import JoblyApi from '../api/api';
+import Error from "../common/Error";
 
 import "./CompanyInfo.css";
 

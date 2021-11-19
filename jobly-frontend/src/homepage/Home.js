@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import UserContext from "./UserContext";
+import UserContext from "../auth/UserContext";
 
 import "./Home.css"
 
@@ -18,7 +18,7 @@ function Home() {
                 ? <h1>Welcome {user.firstName}!!!!!</h1>
                 : <div>
                     <h1>Jobly</h1>
-                    <p>Jobs jobs jobs, come get your jobs~</p>
+                    <p>The world's best jobs listing!</p>
                 </div>
             }
         </div>
