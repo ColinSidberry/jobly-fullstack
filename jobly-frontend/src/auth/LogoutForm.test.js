@@ -1,13 +1,13 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import LoginForm from "./LoginForm";
+import Logout from "./Logout";
 import { MemoryRouter } from "react-router";
 
 it("matches snapshot", function () {
   const { asFragment } = render(
-    <MemoryRouter>
-      <LoginForm />
-    </MemoryRouter>,
+      <MemoryRouter>
+        <Logout />
+      </MemoryRouter>,
   );
   expect(asFragment()).toMatchSnapshot();
 });

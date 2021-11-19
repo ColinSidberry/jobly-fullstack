@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import FormField from "../common/FormField";
 import Error from "../common/Error";
 
-import "./Form.css";
+import "./SignupForm.css";
 
 /**Handles user signup 
  * 
