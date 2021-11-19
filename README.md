@@ -1,42 +1,46 @@
 # Jobly
-React frontend, express backend job searching app
+- Frontend: React
+- Backend: express, postgresql
 
 ## Features Complete
 - Login/Signup
-- User can: 
-    - view profiles, 
-    - follow other users
-    - create public messages
-    - like messages
+- Users can: 
+    - view companies, 
+    - view jobs
 
 ## Getting Up & Running
 ### Backend
-1. Python Envornment Setup
+1. Node Environment Setup
     ```console
     $ npm install
-    $ source venv/bin/activate
-    (venv) $ pip install -r requirements.txt
     ```
 2. Database Setup
     ```console
-    (venv) $ psql
-    =# CREATE DATABASE warbler;
+    $ psql
+    =# CREATE DATABASE jobly;
     =# (control-d)
-    (venv) $ python seed.py
+    psql db_name -f jobly.sql
     ```
-3. .env File Setup
-
-    Add the following lines to your .env file:
-    ```txt
-    SECRET_KEY=fake_key
-    DATABASE_URL=postgresql:///warbler
-    ```
-4. Run the Server
+3. Run the Server
     ```console
-    (venv) $ flask run
+    $ npm start
+    ```
+
+### Frontend
+1. Environment Setup
+    ```console
+    $ npm install
+    ```
+    
+2. Run the Server
+    ```console
+    $ npm start
     ```
 
 ## Database Models
+![db_models_diagram](./db_models_diagram.jpg)
+
+## React Component Diagram
 ![db_models_diagram](./db_models_diagram.jpg)
 
 ## Features Outstanding
