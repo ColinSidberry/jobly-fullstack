@@ -11,11 +11,11 @@ import "./Home.css"
  * Location: /
  */
 function Home() {
-    const user = useContext(UserContext);
+    const currUser = useContext(UserContext);
     return (
         <div className="Home">
-            {user
-                ? <h1>Welcome {user.firstName}!!!!!</h1>
+            {currUser
+                ? <h1>Welcome {currUser.firstName}!!!!!</h1>
                 : <div>
                     <h1>Jobly</h1>
                     <p>The world's best jobs listing!</p>
