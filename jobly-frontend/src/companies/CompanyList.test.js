@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import CompanyList from "./CompanyList";
-import { MemoryRouter } from "react-router";
+import { MemoryRouter } from "react-router-dom";
 
-it("matches snapshot", function () {
+it("snapshot", function () {
     const companyList = [
         {
             name: "test1",
