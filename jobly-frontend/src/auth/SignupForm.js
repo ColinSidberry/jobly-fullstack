@@ -39,7 +39,7 @@ function SignupForm({ signupUser, isAuthed }) {
     if (isAuthed) return <Redirect to="/companies" />;
 
     return (
-        <div className="LoginForm">
+        <div className="SignupForm">
             <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
                 <h3 className="mb-3 mt-5">Sign Up</h3>
 

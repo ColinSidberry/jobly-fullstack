@@ -25,6 +25,10 @@
     ```console
     $ npm start
     ```
+4. Running Tests
+     ```console
+    $ jest test
+    ```
 
 ### Frontend
 1. Environment Setup
@@ -36,12 +40,16 @@
     ```console
     $ npm start
     ```
+3. Running Tests
+     ```console
+    $ jest test
+    ```
 
 ## Database Models
-![db_models_diagram](./db_models_diagram.jpg)
+![db_models_diagram](./DB_Model.jpg)
 
 ## React Component Diagram
-![db_models_diagram](./db_models_diagram.jpg)
+![react_component_diagram](./Component_Design.jpg)
 
 ## Features Outstanding
 - Sending direct messages
