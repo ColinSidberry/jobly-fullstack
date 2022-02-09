@@ -46,7 +46,7 @@
     ```
 
 ## Database Models
-![db_models_diagram](./DB_Model.jpg)
+![db_models_diagram](./DatabaseDesign.png)
 
 ## React Component Diagram
-![react_component_diagram](./Component_Design.jpg)
+![react_component_diagram](./ComponentDesign.png)
